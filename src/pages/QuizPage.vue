@@ -1,0 +1,96 @@
+<template>
+  <div class="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+      <!-- 进度条 -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-700">进度</span>
+          <span class="text-sm font-medium text-gray-700">{{ currentQuestionIndex + 1 }} / {{ totalQuestions }}</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-300"
+            :style="{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }"
+          ></div>
+        </div>
+      </div>
+
+      <!-- 题目卡片 -->
+      <QuestionCard 
+        v-if="currentQuestion"
+        :question="currentQuestion"
+        :selected-answer="selectedAnswer"
+        @select-answer="selectAnswer"
+      />
+
+      <!-- 导航按钮 -->
+      <div class="flex justify-between mt-8">
+        <button
+          v-if="currentQuestionIndex > 0"
+          @click="previousQuestion"
+          class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+        >
+          上一题
+        </button>
+        <div v-else></div>
+
+        <button
+          v-if="currentQuestionIndex < totalQuestions - 1"
+          @click="nextQuestion"
+          :disabled="!selectedAnswer"
+          class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          下一题
+        </button>
+        <button
+          v-else
+          @click="finishQuiz"
+          :disabled="!selectedAnswer"
+          class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          完成答题
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useQuizStore } from '@/store'
+import QuestionCard from '@/components/QuestionCard.vue'
+
+const router = useRouter()
+const quizStore = useQuizStore()
+
+const selectedAnswer = ref<string | null>(null)
+
+const currentQuestionIndex = computed(() => quizStore.currentQuestionIndex)
+const totalQuestions = computed(() => quizStore.questions.length)
+const currentQuestion = computed(() => quizStore.currentQuestion)
+
+const selectAnswer = (answer: string) => {
+  selectedAnswer.value = answer
+  quizStore.setAnswer(currentQuestionIndex.value, answer)
+}
+
+const nextQuestion = () => {
+  if (selectedAnswer.value) {
+    quizStore.nextQuestion()
+    selectedAnswer.value = quizStore.getAnswer(currentQuestionIndex.value + 1) || null
+  }
+}
+
+const previousQuestion = () => {
+  quizStore.previousQuestion()
+  selectedAnswer.value = quizStore.getAnswer(currentQuestionIndex.value) || null
+}
+
+const finishQuiz = () => {
+  if (selectedAnswer.value) {
+    quizStore.finishQuiz()
+    router.push('/result')
+  }
+}
+</script> 
