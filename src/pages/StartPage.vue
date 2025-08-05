@@ -1,31 +1,15 @@
 <template>
-  <div class="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
-      <div class="text-center">
-        <div class="mb-6">
-          <h1 class="text-4xl font-bold text-gray-800 mb-2">答题闯关</h1>
-          <p class="text-gray-600">准备好挑战你的知识了吗？</p>
-        </div>
-        
-        <div class="mb-8">
-          <div class="bg-blue-50 rounded-lg p-4 mb-4">
-            <h3 class="font-semibold text-blue-800 mb-2">游戏规则</h3>
-            <ul class="text-sm text-blue-700 space-y-1">
-              <li>• 总共5道题目</li>
-              <li>• 每题有4个选项</li>
-              <li>• 答对得分，答错不扣分</li>
-              <li>• 完成后查看成绩</li>
-            </ul>
-          </div>
-        </div>
-
+  <div class="w-full min-h-screen bg-[#F4F3EF] flex items-center p-4">
+    <div class="bg-transparent rounded-2xl shadow-none p-8 max-w-md w-full">
+        <img src="/images/subtitletop.svg" alt="Logo" class="w-40 h-14 mb-4 rounded-none shadow-none" />
+        <img src="/images/title.svg" alt="Logo" class="w-77 h-32 mb-4 rounded-none shadow-none" />
+        <img src="/images/subtitlebottom.svg" alt="Logo" class="w-120 h-12 mb-4 rounded-none shadow-none svg-color" />
         <button
           @click="startQuiz"
-          class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+          class="bg-black text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-all duration-200 transform hover:scale-105 shadow-lg"
         >
           开始答题
         </button>
-      </div>
     </div>
   </div>
 </template>

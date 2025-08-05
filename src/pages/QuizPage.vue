@@ -1,20 +1,6 @@
 <template>
   <div class="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
     <div class="max-w-2xl mx-auto">
-      <!-- 进度条 -->
-      <div class="mb-8">
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-gray-700">进度</span>
-          <span class="text-sm font-medium text-gray-700">{{ currentQuestionIndex + 1 }} / {{ totalQuestions }}</span>
-        </div>
-        <div class="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-300"
-            :style="{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }"
-          ></div>
-        </div>
-      </div>
-
       <!-- 题目卡片 -->
       <QuestionCard 
         v-if="currentQuestion"

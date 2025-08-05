@@ -10,29 +10,9 @@ export const useQuizStore = defineStore('quiz', {
   state: () => ({
     questions: [
       {
-        question: 'Vue.js 是由谁开发的？',
-        options: ['Evan You', 'Dan Abramov', 'Jordan Walke', 'Angus Croll'],
-        correctAnswer: 'Evan You'
-      },
-      {
-        question: 'Vue 3 的默认构建工具是什么？',
-        options: ['Webpack', 'Vite', 'Rollup', 'Parcel'],
-        correctAnswer: 'Vite'
-      },
-      {
-        question: '在 Vue 3 中，用于响应式数据的 API 是什么？',
-        options: ['ref()', 'reactive()', 'computed()', '以上都是'],
-        correctAnswer: '以上都是'
-      },
-      {
-        question: 'Vue 3 的组合式 API 中，用于生命周期钩子的是什么？',
-        options: ['onMounted', 'onCreated', 'onBeforeMount', 'onAfterMount'],
-        correctAnswer: 'onMounted'
-      },
-      {
-        question: 'Tailwind CSS 是一个什么类型的框架？',
-        options: ['组件库', '工具类优先的 CSS 框架', 'JavaScript 框架', '构建工具'],
-        correctAnswer: '工具类优先的 CSS 框架'
+        question: '在UI设计中，以下哪种颜色搭配最符合现代简约风格？',
+        options: ['大红配大绿', '黑白灰配蓝色', '彩虹色渐变', '荧光色配黑色'],
+        correctAnswer: '黑白灰配蓝色'
       }
     ] as Question[],
     currentQuestionIndex: 0,
