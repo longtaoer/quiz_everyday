@@ -2,78 +2,18 @@
   <div class="w-full min-h-screen bg-[#F4F3EF] flex items-center justify-center p-4">
     <div class="max-w-4xl mx-auto w-full">
       <!-- 成绩概览 -->
-      <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">今日学习完成！</h1>
-        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full w-32 h-32 mx-auto flex items-center justify-center mb-4">
-          <div class="text-center text-white">
-            <div class="text-3xl font-bold">{{ score }}</div>
-            <div class="text-sm">分</div>
-          </div>
-        </div>
-        <div class="text-lg text-gray-600">
-          答对了 {{ correctAnswers }} 题，共 {{ totalQuestions }} 题
-        </div>
-        <div class="mt-2">
-          <span class="text-2xl font-bold" :class="scoreColor">{{ scorePercentage }}%</span>
-        </div>
+      <div class="text-center flex flex-col items-center mb-8">
+        <img src="/images/result.svg" alt="result" class="w-auto h-80 mb-6">
       </div>
 
-      <!-- 知识点总结 -->
-      <div class="bg-white rounded-2xl shadow-xl p-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">今日知识点总结</h2>
-        
-        <div class="space-y-6">
-          <div 
-            v-for="(question, index) in questions" 
-            :key="index"
-            class="border rounded-lg p-6"
-            :class="getQuestionClass(index)"
-          >
-            <div class="flex items-start justify-between mb-4">
-              <h3 class="text-lg font-semibold text-gray-800">第 {{ index + 1 }} 题</h3>
-              <span 
-                class="px-3 py-1 rounded-full text-sm font-medium"
-                :class="getAnswerClass(index)"
-              >
-                {{ getAnswerStatus(index) }}
-              </span>
-            </div>
-            
-            <p class="text-gray-700 mb-4">{{ question.question }}</p>
-            
-            <div class="space-y-2 mb-4">
-              <div 
-                v-for="option in question.options" 
-                :key="option"
-                class="flex items-center p-2 rounded"
-                :class="getOptionClass(index, option)"
-              >
-                <span class="mr-2">{{ option }}</span>
-                <span v-if="isCorrectAnswer(index, option)" class="text-green-600 font-medium">✓ 正确答案</span>
-                <span v-else-if="isSelectedAnswer(index, option)" class="text-red-600 font-medium">✗ 你的答案</span>
-              </div>
-            </div>
-
-            <!-- 知识点解释 -->
-            <div class="bg-blue-50 rounded-lg p-4">
-              <h4 class="font-semibold text-blue-800 mb-2">知识点</h4>
-              <p class="text-blue-700 text-sm">{{ getExplanation(index) }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <!-- 操作按钮 -->
       <div class="flex justify-center space-x-4 mt-8">
-        <button
-          @click="restartQuiz"
-          class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          重新开始
-        </button>
+      
         <button
           @click="goHome"
-          class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+          class="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
         >
           返回首页
         </button>

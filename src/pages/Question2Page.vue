@@ -3,8 +3,7 @@
     <div class="max-w-2xl mx-auto w-full">
       <!-- 题目卡片 -->
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
-        <h2 class="text-xl font-regular text-gray-600 mb-6">{{ question.question }}</h2>
-        <img src="/images/question2.svg" alt="Question 2" class="w-auto h-20 mb-6">
+        <img src="/images/question2.svg" alt="Question 2" class="w-auto h-12 mb-6">
         <!-- 选项列表 -->
         <div class="grid grid-cols-3 gap-4 mb-0">
           <div
@@ -23,8 +22,20 @@
           </div>
         </div>
       </div>
+      <!-- 底部信息区域 - 撑满屏幕宽度 -->
+    <div class="h-32 fixed bottom-0 left-0 right-0 p-4 ">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-start gap-12">
+           <!-- 知识点解释 -->
+          <div class="flex-1 flex items-start gap-3">
+            
+            <!-- 文字内容 -->
+            <div class="flex-1 text-transparent">
+              <span class="text-lg font-semibold mb-4">你太棒啦！</span>
+            </div>
+          </div>
 
-      <!-- 提交按钮 -->
+          <!-- 提交按钮 -->
       <div class="text-right mr-0">
         <button
           @click="submitAnswer"
@@ -34,6 +45,11 @@
           提交答案
         </button>
       </div>
+        </div>
+      </div>
+    </div>
+
+      
     </div>
   </div>
 </template>
