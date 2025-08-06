@@ -3,81 +3,76 @@
     <div class="max-w-2xl mx-auto w-full">
       <!-- 答案卡片 -->
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">{{ question.question }}</h2>
-        
-        <!-- 图片区域 -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="bg-gray-100 rounded-lg p-4 text-center">
-            <div class="w-24 h-24 bg-blue-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span class="text-blue-600 font-semibold">图1</span>
-            </div>
-            <p class="text-sm text-gray-600">设计元素A</p>
-          </div>
-          <div class="bg-gray-100 rounded-lg p-4 text-center">
-            <div class="w-24 h-24 bg-green-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span class="text-green-600 font-semibold">图2</span>
-            </div>
-            <p class="text-sm text-gray-600">设计元素B</p>
-          </div>
-          <div class="bg-gray-100 rounded-lg p-4 text-center">
-            <div class="w-24 h-24 bg-yellow-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span class="text-yellow-600 font-semibold">图3</span>
-            </div>
-            <p class="text-sm text-gray-600">设计元素C</p>
-          </div>
-          <div class="bg-gray-100 rounded-lg p-4 text-center">
-            <div class="w-24 h-24 bg-purple-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span class="text-purple-600 font-semibold">图4</span>
-            </div>
-            <p class="text-sm text-gray-600">设计元素D</p>
-          </div>
-        </div>
+        <h2 class="text-xl font-regular text-gray-600 mb-6">{{ question.question }}</h2>
+        <img src="/images/question2.svg" alt="Question 2" class="w-auto h-20 mb-6">
         
         <!-- 选项列表 -->
-        <div class="space-y-3 mb-6">
+        <div class="grid grid-cols-3 gap-4 mb-0">
           <div 
-            v-for="option in question.options" 
+            v-for="(option, index) in question.options" 
             :key="option"
-            class="flex items-center p-3 rounded-lg border-2"
-            :class="getOptionClass(option)"
+            class="relative"
           >
-            <div class="w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center"
-                 :class="getRadioClass(option)">
-              <div v-if="isSelectedAnswer(option)" 
-                   class="w-3 h-3 rounded-full bg-blue-500"></div>
-            </div>
-            <span class="text-gray-700">{{ option }}</span>
-            <div class="ml-auto">
-              <span v-if="isCorrectAnswer(option)" class="text-[#5BC279] font-medium">✓ 正确答案</span>
-              <span v-else-if="isSelectedAnswer(option)" class="text-[#DF6935] font-medium">✗ 你的答案</span>
+            <img 
+              :src="getImageSrc(index)" 
+              :alt="option" 
+              class="w-full h-auto object-contain rounded-lg border-2 transition-all duration-200"
+              :class="getImageClass(option)"
+              @error="handleImageError"
+            />
+            <!-- 结果标签 -->
+            <div class="absolute top-2 right-2">
+              <span v-if="isCorrectAnswer(option)" class="bg-[#5BC279] text-white px-2 py-1 rounded text-xs font-medium">✓ 正确答案</span>
+              <span v-else-if="isSelectedAnswer(option)" class="bg-[#DF6935] text-white px-2 py-1 rounded text-xs font-medium">✗ 你的答案</span>
             </div>
           </div>
         </div>
 
-        <!-- 结果状态 -->
-        <div class="p-4 rounded-lg border-2 mb-4" :class="resultClass">
-          <div class="flex items-center mb-2">
-            <span class="text-lg font-semibold" :class="resultTextClass">
-              {{ isCorrect ? '✓ 回答正确！' : '✗ 回答错误' }}
-            </span>
-          </div>
-        </div>
-
-        <!-- 知识点解释 -->
-        <div class="bg-blue-50 rounded-lg p-4">
-          <h3 class="font-semibold text-blue-800 mb-2">知识点</h3>
-          <p class="text-blue-700 text-sm">{{ explanation }}</p>
-        </div>
       </div>
+    </div>
 
-      <!-- 回顾知识点按钮 -->
-      <div class="text-center">
-        <button
-          @click="goToSummary"
-          class="px-8 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
-        >
-          回顾今日知识点
-        </button>
+    <!-- 底部信息区域 - 撑满屏幕宽度 -->
+    <div class="h-36 fixed bottom-0 left-0 right-0 p-4 " :class="bottomInfoClass">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-start gap-12">
+           <!-- 知识点解释 -->
+          <div class="flex-1 flex items-start gap-3">
+            <!-- 结果图片 -->
+            <img 
+              v-if="isCorrect"
+              src="/images/rightresult.svg" 
+              alt="回答正确"
+              class="w-16 h-16 flex-shrink-0 mr-2"
+            />
+            <img 
+              v-else
+              src="/images/wrongresult.svg" 
+              alt="回答错误"
+              class="w-16 h-16 flex-shrink-0 mr-2"
+            />
+            
+            <!-- 文字内容 -->
+            <div class="flex-1">
+              <span class="text-lg font-semibold mb-4" :class="resultTextClass">
+                {{ isCorrect ? '你太棒啦！' : `再接再厉！` }}
+              </span>
+              <p class="text-gray-500 text-sm mt-2">
+                <span class="font-semibold">知识点：</span>{{ explanation }}
+              </p>
+            </div>
+          </div>
+
+          <!-- 挑战下一题按钮 -->
+          <div class="flex-shrink-0 items-center h-full mt-8">
+            <button
+              @click="nextQuestion"
+              class="px-8 py-3 font-semibold rounded-full transition-colors"
+              :class="buttonClass"
+            >
+              挑战下一题
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -97,22 +92,56 @@ const isCorrect = computed(() => quizStore.isAnswerCorrect(1))
 
 const resultClass = computed(() => {
   return isCorrect.value 
-    ? 'border-[#5BC279] bg-[#5BC279]/10' 
-    : 'border-[#DF6935] bg-[#DF6935]/10'
+    ? 'border-[#5BC279] bg-[#FCFFFD]' 
+    : 'border-[#DF6935] bg-[#FFFCFC]'
 })
 
 const resultTextClass = computed(() => {
   return isCorrect.value 
-    ? 'text-[#5BC279]' 
+    ? 'text-[#4AB832]' 
     : 'text-[#DF6935]'
 })
 
+const bottomInfoClass = computed(() => {
+  return isCorrect.value 
+    ? 'bg-[#E0F7C8]' 
+    : 'bg-[#FAE0E0]'
+})
+
+const buttonClass = computed(() => {
+  return isCorrect.value 
+    ? 'bg-[#6EC25B] text-white hover:bg-[#5DB24A]' 
+    : 'bg-[#DB5D26] text-white hover:bg-[#CA4C15]'
+})
+
+const getImageSrc = (index: number) => {
+  const imageNames = ['q2_1.png', 'q2_2.png', 'q2_3.png']
+  return `/quiz_everyday/images/${imageNames[index]}`
+}
+
+const getImageClass = (option: string) => {
+  if (isCorrectAnswer(option)) {
+    return 'border-[#5BC279] border-2'
+  }
+  if (isSelectedAnswer(option)) {
+    return 'border-[#DF6935] border-2'
+  }
+  return 'border-transparent border-2'
+}
+
+const handleImageError = (event: Event) => {
+  const img = event.target as HTMLImageElement
+  console.log('Image failed to load:', img.src)
+  console.log('Alt text:', img.alt)
+  img.style.display = 'none'
+}
+
 const getOptionClass = (option: string) => {
   if (quizStore.isCorrectAnswer(1, option)) {
-    return 'border-[#5BC279] bg-[#5BC279]/10'
+    return 'border-[#5BC279] bg-[#FCFFFD]'
   }
   if (quizStore.isSelectedAnswer(1, option)) {
-    return 'border-[#DF6935] bg-[#DF6935]/10'
+    return 'border-[#DF6935] bg-[#FFFCFC]'
   }
   return 'border-gray-200'
 }
@@ -135,9 +164,9 @@ const isSelectedAnswer = (option: string) => {
   return quizStore.isSelectedAnswer(1, option)
 }
 
-const explanation = '一致性是设计中的重要原则，它确保界面元素在视觉和行为上保持统一。通过保持一致的色彩、字体、间距和交互模式，用户可以更容易地理解和预测界面行为，从而提升用户体验和可用性。'
+const explanation = '在UI设计中，色彩搭配需要遵循一定的原则。主色调应该占据60%的空间，辅助色占30%，强调色占10%。这样的比例分配能够创造视觉层次，同时保持整体和谐。'
 
-const goToSummary = () => {
-  router.push('/summary')
+const nextQuestion = () => {
+  router.push('/question3')
 }
 </script> 

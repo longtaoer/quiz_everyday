@@ -4,7 +4,7 @@
       <!-- 题目卡片 -->
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
         <h2 class="text-xl font-regular text-gray-600 mb-6">{{ question.question }}</h2>
-        <img src="/images/question1.svg" alt="Question 1" class="w-full h-auto mb-6">
+        <img src="/images/question1.svg" alt="Question 1" class="w-auto h-20 mb-6">
         <!-- 选项列表 -->
         <div class="space-y-3 mb-6">
           <button

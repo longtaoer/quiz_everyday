@@ -30,6 +30,16 @@ const router = createRouter({
       component: () => import('../pages/Answer2Page.vue'),
     },
     {
+      path: '/question3',
+      name: 'question3',
+      component: () => import('../pages/Question3Page.vue'),
+    },
+    {
+      path: '/answer3',
+      name: 'answer3',
+      component: () => import('../pages/Answer3Page.vue'),
+    },
+    {
       path: '/summary',
       name: 'summary',
       component: () => import('../pages/SummaryPage.vue'),

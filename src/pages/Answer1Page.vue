@@ -3,20 +3,20 @@
     <div class="max-w-2xl mx-auto w-full">
       <!-- 答案卡片 -->
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">{{ question.question }}</h2>
-        
+        <h2 class="text-xl font-regular text-gray-600 mb-6">{{ question.question }}</h2>
+        <img src="/images/question1.svg" alt="Question 1" class="w-auto h-20 mb-6">
         <!-- 选项列表 -->
         <div class="space-y-3 mb-6">
           <div 
             v-for="option in question.options" 
             :key="option"
-            class="flex items-center p-3 rounded-lg border-2"
+            class="flex items-center p-4 rounded-lg border-2"
             :class="getOptionClass(option)"
           >
             <div class="w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center"
                  :class="getRadioClass(option)">
               <div v-if="isSelectedAnswer(option)" 
-                   class="w-3 h-3 rounded-full bg-blue-500"></div>
+                   :class="isCorrectAnswer(option) ? 'w-3 h-3 rounded-full bg-[#5BC279]' : 'w-3 h-3 rounded-full bg-[#DF6935]'"></div>
             </div>
             <span class="text-gray-700">{{ option }}</span>
             <div class="ml-auto">

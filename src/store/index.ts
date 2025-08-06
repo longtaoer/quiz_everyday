@@ -15,9 +15,9 @@ export const useQuizStore = defineStore('quiz', {
         correctAnswer: '按钮应当至少具有一定的最小尺寸，以避免误触'
       },
       {
-        question: '请将以下设计元素与其对应的设计原则连线：',
-        options: ['简约性', '一致性', '层次性', '可访问性'],
-        correctAnswer: '一致性'
+        question: '请选择正确答案',
+        options: ['方案一', '方案二', '方案三'],
+        correctAnswer: '方案三'
       }
     ] as Question[],
     currentQuestionIndex: 0,
