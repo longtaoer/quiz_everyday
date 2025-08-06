@@ -13,6 +13,11 @@ export const useQuizStore = defineStore('quiz', {
         question: '在UI设计中，以下哪种颜色搭配最符合现代简约风格？',
         options: ['大红配大绿', '黑白灰配蓝色', '彩虹色渐变', '荧光色配黑色'],
         correctAnswer: '黑白灰配蓝色'
+      },
+      {
+        question: '在用户体验设计中，以下哪个原则最重要？',
+        options: ['美观性', '可用性', '创新性', '复杂性'],
+        correctAnswer: '可用性'
       }
     ] as Question[],
     currentQuestionIndex: 0,

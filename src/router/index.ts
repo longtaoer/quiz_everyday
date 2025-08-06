@@ -10,14 +10,29 @@ const router = createRouter({
       component: StartPage,
     },
     {
-      path: '/quiz',
-      name: 'quiz',
-      component: () => import('../pages/QuizPage.vue'),
+      path: '/question1',
+      name: 'question1',
+      component: () => import('../pages/Question1Page.vue'),
     },
     {
-      path: '/result',
-      name: 'result',
-      component: () => import('../pages/ResultPage.vue'),
+      path: '/answer1',
+      name: 'answer1',
+      component: () => import('../pages/Answer1Page.vue'),
+    },
+    {
+      path: '/question2',
+      name: 'question2',
+      component: () => import('../pages/Question2Page.vue'),
+    },
+    {
+      path: '/answer2',
+      name: 'answer2',
+      component: () => import('../pages/Answer2Page.vue'),
+    },
+    {
+      path: '/summary',
+      name: 'summary',
+      component: () => import('../pages/SummaryPage.vue'),
     },
   ],
 })

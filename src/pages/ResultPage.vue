@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+  <div class="w-full min-h-screen bg-[#F4F3EF] flex items-center justify-center p-4">
     <div class="max-w-4xl mx-auto">
-      <div class="bg-white rounded-2xl shadow-2xl p-8">
+      <div class="bg-transparent rounded-2xl shadow-none p-8">
         <!-- 成绩概览 -->
         <div class="text-center mb-8">
           <h1 class="text-4xl font-bold text-gray-800 mb-4">答题完成！</h1>

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+  <div class="w-full min-h-screen bg-[#F4F3EF] flex items-center justify-center p-4">
     <div class="max-w-2xl mx-auto">
       <!-- 题目卡片 -->
       <QuestionCard 
@@ -8,6 +8,8 @@
         :selected-answer="selectedAnswer"
         @select-answer="selectAnswer"
       />
+
+
 
       <!-- 导航按钮 -->
       <div class="flex justify-between mt-8">
@@ -56,9 +58,16 @@ const currentQuestionIndex = computed(() => quizStore.currentQuestionIndex)
 const totalQuestions = computed(() => quizStore.questions.length)
 const currentQuestion = computed(() => quizStore.currentQuestion)
 
+
+
 const selectAnswer = (answer: string) => {
   selectedAnswer.value = answer
   quizStore.setAnswer(currentQuestionIndex.value, answer)
+  
+  // 答完题目后跳转到答案页面
+  setTimeout(() => {
+    router.push(`/answer/${currentQuestionIndex.value}`)
+  }, 500)
 }
 
 const nextQuestion = () => {
