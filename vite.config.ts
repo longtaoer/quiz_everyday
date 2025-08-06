@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/quiz_everyday/',  // 这里加上你的仓库名，注意前后斜杠
   plugins: [
     vue(),
     vueDevTools(),
