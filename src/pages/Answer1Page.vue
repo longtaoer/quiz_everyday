@@ -20,36 +20,57 @@
             </div>
             <span class="text-gray-700">{{ option }}</span>
             <div class="ml-auto">
-              <span v-if="isCorrectAnswer(option)" class="text-green-600 font-medium">✓ 正确答案</span>
-              <span v-else-if="isSelectedAnswer(option)" class="text-red-600 font-medium">✗ 你的答案</span>
+              <span v-if="isCorrectAnswer(option)" class="text-[#5BC279] font-medium">✓ 正确答案</span>
+              <span v-else-if="isSelectedAnswer(option)" class="text-[#DF6935] font-medium">✗ 你的答案</span>
             </div>
           </div>
         </div>
 
-        <!-- 结果状态 -->
-        <div class="p-4 rounded-lg border-2 mb-4" :class="resultClass">
-          <div class="flex items-center mb-2">
-            <span class="text-lg font-semibold" :class="resultTextClass">
-              {{ isCorrect ? '✓ 回答正确！' : '✗ 回答错误' }}
-            </span>
+      </div>
+    </div>
+
+    <!-- 底部信息区域 - 撑满屏幕宽度 -->
+    <div class="h-36 fixed bottom-0 left-0 right-0 p-4 " :class="bottomInfoClass">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-start gap-12">
+           <!-- 知识点解释 -->
+          <div class="flex-1 flex items-start gap-3">
+            <!-- 结果图片 -->
+            <img 
+              v-if="isCorrect"
+              src="/images/rightresult.svg" 
+              alt="回答正确"
+              class="w-16 h-16 flex-shrink-0 mr-2"
+            />
+            <img 
+              v-else
+              src="/images/wrongresult.svg" 
+              alt="回答错误"
+              class="w-16 h-16 flex-shrink-0 mr-2"
+            />
+            
+            <!-- 文字内容 -->
+            <div class="flex-1">
+              <span class="text-lg font-semibold mb-4" :class="resultTextClass">
+                {{ isCorrect ? '你太棒啦！' : `再接再厉！` }}
+              </span>
+              <p class="text-gray-500 text-sm mt-2">
+                <span class="font-semibold">知识点：</span>{{ explanation }}
+              </p>
+            </div>
+          </div>
+
+          <!-- 挑战下一题按钮 -->
+          <div class="flex-shrink-0 items-center h-full mt-8">
+            <button
+              @click="nextQuestion"
+              class="px-8 py-3 font-semibold rounded-full transition-colors"
+              :class="buttonClass"
+            >
+              挑战下一题
+            </button>
           </div>
         </div>
-
-        <!-- 知识点解释 -->
-        <div class="bg-blue-50 rounded-lg p-4">
-          <h3 class="font-semibold text-blue-800 mb-2">知识点</h3>
-          <p class="text-blue-700 text-sm">{{ explanation }}</p>
-        </div>
-      </div>
-
-      <!-- 挑战下一题按钮 -->
-      <div class="text-center">
-        <button
-          @click="nextQuestion"
-          class="px-8 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
-        >
-          挑战下一题
-        </button>
       </div>
     </div>
   </div>
@@ -69,32 +90,50 @@ const isCorrect = computed(() => quizStore.isAnswerCorrect(0))
 
 const resultClass = computed(() => {
   return isCorrect.value 
-    ? 'border-green-200 bg-green-50' 
-    : 'border-red-200 bg-red-50'
+    ? 'border-[#5BC279] bg-[#FCFFFD]' 
+    : 'border-[#DF6935] bg-[#FFFCFC]'
 })
 
 const resultTextClass = computed(() => {
   return isCorrect.value 
-    ? 'text-green-700' 
-    : 'text-red-700'
+    ? 'text-[#4AB832]' 
+    : 'text-[#DF6935]'
+})
+
+const bottomInfoClass = computed(() => {
+  return isCorrect.value 
+    ? 'bg-[#E0F7C8]' 
+    : 'bg-[#FAE0E0]'
+})
+
+const buttonClass = computed(() => {
+  return isCorrect.value 
+    ? 'bg-[#6EC25B] text-white hover:bg-[#5DB24A]' 
+    : 'bg-[#DB5D26] text-white hover:bg-[#CA4C15]'
+})
+
+const imageSrc = computed(() => {
+  return isCorrect.value 
+    ? '/images/rightresult.svg'
+    : '/images/wrongresult.svg'
 })
 
 const getOptionClass = (option: string) => {
   if (quizStore.isCorrectAnswer(0, option)) {
-    return 'border-green-300 bg-green-50'
+    return 'border-[#5BC279] bg-[#FCFFFD]'
   }
   if (quizStore.isSelectedAnswer(0, option)) {
-    return 'border-red-300 bg-red-50'
+    return 'border-[#DF6935] bg-[#FFFCFC]'
   }
   return 'border-gray-200'
 }
 
 const getRadioClass = (option: string) => {
   if (quizStore.isCorrectAnswer(0, option)) {
-    return 'border-green-500'
+    return 'border-[#5BC279]'
   }
   if (quizStore.isSelectedAnswer(0, option)) {
-    return 'border-red-500'
+    return 'border-[#DF6935]'
   }
   return 'border-gray-300'
 }
@@ -107,7 +146,7 @@ const isSelectedAnswer = (option: string) => {
   return quizStore.isSelectedAnswer(0, option)
 }
 
-const explanation = '现代简约风格强调简洁、清晰的设计原则。黑白灰作为基础色调，搭配蓝色作为点缀，既保持了简约感，又增加了视觉层次。这种配色方案在UI设计中广泛应用，能够提供良好的可读性和用户体验。'
+const explanation = '有些设计师会认为按钮可以根据内容来调整大小，但这可能导致触摸困难，尤其在小屏设备上。标准的 44px 是为了提高可用性。'
 
 const nextQuestion = () => {
   router.push('/question2')

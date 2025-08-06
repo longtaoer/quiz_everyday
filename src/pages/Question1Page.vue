@@ -3,8 +3,8 @@
     <div class="max-w-2xl mx-auto w-full">
       <!-- 题目卡片 -->
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
-        <h2 class="text-xl font-bold text-gray-800 mb-6">{{ question.question }}</h2>
-        
+        <h2 class="text-xl font-regular text-gray-600 mb-6">{{ question.question }}</h2>
+        <img src="/images/question1.svg" alt="Question 1" class="w-full h-auto mb-6">
         <!-- 选项列表 -->
         <div class="space-y-3 mb-6">
           <button
@@ -18,7 +18,7 @@
               <div class="w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center"
                    :class="getRadioClass(option)">
                 <div v-if="selectedAnswer === option" 
-                     class="w-3 h-3 rounded-full bg-blue-500"></div>
+                     class="w-3 h-3 rounded-full bg-black"></div>
               </div>
               <span class="text-gray-700">{{ option }}</span>
             </div>
@@ -27,7 +27,7 @@
       </div>
 
       <!-- 提交按钮 -->
-      <div class="text-center">
+      <div class="text-right mr-0">
         <button
           @click="submitAnswer"
           :disabled="!selectedAnswer"
@@ -58,14 +58,14 @@ const selectAnswer = (answer: string) => {
 
 const getOptionClass = (option: string) => {
   if (option === selectedAnswer.value) {
-    return 'border-blue-500 bg-blue-50'
+    return 'border-black bg-gray-50'
   }
-  return 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
+  return 'border-gray-200 hover:border-black hover:bg-gray-50'
 }
 
 const getRadioClass = (option: string) => {
   if (option === selectedAnswer.value) {
-    return 'border-blue-500'
+    return 'border-black'
   }
   return 'border-gray-300'
 }

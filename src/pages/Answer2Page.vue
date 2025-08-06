@@ -5,6 +5,34 @@
       <div class="bg-transparent rounded-none shadow-none p-6 mb-6">
         <h2 class="text-xl font-bold text-gray-800 mb-4">{{ question.question }}</h2>
         
+        <!-- 图片区域 -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <div class="w-24 h-24 bg-blue-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <span class="text-blue-600 font-semibold">图1</span>
+            </div>
+            <p class="text-sm text-gray-600">设计元素A</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <div class="w-24 h-24 bg-green-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <span class="text-green-600 font-semibold">图2</span>
+            </div>
+            <p class="text-sm text-gray-600">设计元素B</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <div class="w-24 h-24 bg-yellow-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <span class="text-yellow-600 font-semibold">图3</span>
+            </div>
+            <p class="text-sm text-gray-600">设计元素C</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <div class="w-24 h-24 bg-purple-200 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <span class="text-purple-600 font-semibold">图4</span>
+            </div>
+            <p class="text-sm text-gray-600">设计元素D</p>
+          </div>
+        </div>
+        
         <!-- 选项列表 -->
         <div class="space-y-3 mb-6">
           <div 
@@ -20,8 +48,8 @@
             </div>
             <span class="text-gray-700">{{ option }}</span>
             <div class="ml-auto">
-              <span v-if="isCorrectAnswer(option)" class="text-green-600 font-medium">✓ 正确答案</span>
-              <span v-else-if="isSelectedAnswer(option)" class="text-red-600 font-medium">✗ 你的答案</span>
+              <span v-if="isCorrectAnswer(option)" class="text-[#5BC279] font-medium">✓ 正确答案</span>
+              <span v-else-if="isSelectedAnswer(option)" class="text-[#DF6935] font-medium">✗ 你的答案</span>
             </div>
           </div>
         </div>
@@ -69,32 +97,32 @@ const isCorrect = computed(() => quizStore.isAnswerCorrect(1))
 
 const resultClass = computed(() => {
   return isCorrect.value 
-    ? 'border-green-200 bg-green-50' 
-    : 'border-red-200 bg-red-50'
+    ? 'border-[#5BC279] bg-[#5BC279]/10' 
+    : 'border-[#DF6935] bg-[#DF6935]/10'
 })
 
 const resultTextClass = computed(() => {
   return isCorrect.value 
-    ? 'text-green-700' 
-    : 'text-red-700'
+    ? 'text-[#5BC279]' 
+    : 'text-[#DF6935]'
 })
 
 const getOptionClass = (option: string) => {
   if (quizStore.isCorrectAnswer(1, option)) {
-    return 'border-green-300 bg-green-50'
+    return 'border-[#5BC279] bg-[#5BC279]/10'
   }
   if (quizStore.isSelectedAnswer(1, option)) {
-    return 'border-red-300 bg-red-50'
+    return 'border-[#DF6935] bg-[#DF6935]/10'
   }
   return 'border-gray-200'
 }
 
 const getRadioClass = (option: string) => {
   if (quizStore.isCorrectAnswer(1, option)) {
-    return 'border-green-500'
+    return 'border-[#5BC279]'
   }
   if (quizStore.isSelectedAnswer(1, option)) {
-    return 'border-red-500'
+    return 'border-[#DF6935]'
   }
   return 'border-gray-300'
 }
@@ -107,7 +135,7 @@ const isSelectedAnswer = (option: string) => {
   return quizStore.isSelectedAnswer(1, option)
 }
 
-const explanation = '在用户体验设计中，可用性是最重要的原则。无论设计多么美观或创新，如果用户无法轻松完成任务，设计就是失败的。可用性确保产品能够满足用户的基本需求，提供直观、高效的使用体验。'
+const explanation = '一致性是设计中的重要原则，它确保界面元素在视觉和行为上保持统一。通过保持一致的色彩、字体、间距和交互模式，用户可以更容易地理解和预测界面行为，从而提升用户体验和可用性。'
 
 const goToSummary = () => {
   router.push('/summary')

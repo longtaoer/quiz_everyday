@@ -10,14 +10,14 @@ export const useQuizStore = defineStore('quiz', {
   state: () => ({
     questions: [
       {
-        question: '在UI设计中，以下哪种颜色搭配最符合现代简约风格？',
-        options: ['大红配大绿', '黑白灰配蓝色', '彩虹色渐变', '荧光色配黑色'],
-        correctAnswer: '黑白灰配蓝色'
+        question: '请选择正确答案',
+        options: ['按钮的大小应根据其功能的重要性而变化', '按钮应当至少具有一定的最小尺寸，以避免误触', '按钮大小应根据内容长短自适应', '按钮的尺寸不需要固定，根据界面布局灵活调整即可'],
+        correctAnswer: '按钮应当至少具有一定的最小尺寸，以避免误触'
       },
       {
-        question: '在用户体验设计中，以下哪个原则最重要？',
-        options: ['美观性', '可用性', '创新性', '复杂性'],
-        correctAnswer: '可用性'
+        question: '请将以下设计元素与其对应的设计原则连线：',
+        options: ['简约性', '一致性', '层次性', '可访问性'],
+        correctAnswer: '一致性'
       }
     ] as Question[],
     currentQuestionIndex: 0,

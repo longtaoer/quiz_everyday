@@ -27,7 +27,7 @@
             <div class="w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center"
                  :class="getRadioClass(option)">
               <div v-if="isSelectedAnswer(option)" 
-                   class="w-3 h-3 rounded-full bg-blue-500"></div>
+                   class="w-3 h-3 rounded-full bg-black"></div>
             </div>
             <span class="text-gray-700">{{ option }}</span>
             <div class="ml-auto">
@@ -98,32 +98,32 @@ const isCorrect = computed(() => quizStore.isAnswerCorrect(questionIndex.value))
 
 const resultClass = computed(() => {
   return isCorrect.value 
-    ? 'border-green-200 bg-green-50' 
-    : 'border-red-200 bg-red-50'
+    ? 'border-[#5BC279] bg-[#FCFFFD]' 
+    : 'border-[#DF6935] bg-[#FFFCFC]'
 })
 
 const resultTextClass = computed(() => {
   return isCorrect.value 
-    ? 'text-green-700' 
-    : 'text-red-700'
+    ? 'text-[#5BC279]' 
+    : 'text-[#DF6935]'
 })
 
 const getOptionClass = (option: string) => {
   if (quizStore.isCorrectAnswer(questionIndex.value, option)) {
-    return 'border-green-300 bg-green-50'
+    return 'border-[#5BC279] bg-[#FCFFFD]'
   }
   if (quizStore.isSelectedAnswer(questionIndex.value, option)) {
-    return 'border-red-300 bg-red-50'
+    return 'border-[#DF6935] bg-[#FFFCFC]'
   }
   return 'border-gray-200'
 }
 
 const getRadioClass = (option: string) => {
   if (quizStore.isCorrectAnswer(questionIndex.value, option)) {
-    return 'border-green-500'
+    return 'border-[#5BC279]'
   }
   if (quizStore.isSelectedAnswer(questionIndex.value, option)) {
-    return 'border-red-500'
+    return 'border-[#DF6935]'
   }
   return 'border-gray-300'
 }
